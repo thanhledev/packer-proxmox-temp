@@ -1,1 +1,1 @@
-# packer-proxmox-temp
+### Packer conf for creating Proxmox VM template

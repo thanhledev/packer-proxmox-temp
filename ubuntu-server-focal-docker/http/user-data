@@ -1,0 +1,36 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: de
+  ssh:
+    install-server: true
+    allow-pw: true
+    disable_root: true
+    ssh_quiet_keygen: true
+    allow_public_ssh_keys: true
+  packages:
+    - qemu-guest-agent
+    - sudo
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    package_upgrade: false
+    timezone: Europe/Berlin
+    users:
+      - name: student
+        groups: [adm, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        # gen sha512 hashed password
+        # apt-get install whois
+        # mkpasswd -m sha-512 --rounds=4096
+        passwd: $6$rounds=4096$YDNOym4WJl.$FN0O4uq62JyCYjIEKKKWEVfpjTf2zQ2ETG61S1NDlES5n8zNcy.iidaDuHkyF29LJrJgbAIRVmiGdj4vh4l3R0
+        # - or -
+        # ssh_authorized_keys:
+        #   - your-ssh-key
